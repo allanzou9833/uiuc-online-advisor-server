@@ -12,18 +12,34 @@ services:
       - app-db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  # api:
-  #   container_name: api
-  #   restart: always
-  #   build: ./api
-  #   command: npm start
-  #   ports:
-  #     - "5000:5000"
-  #   volumes:
-  #     - ./api:/usr/src/app/
-  #     - /usr/src/app/node_modules
-  #   depends_on:
-  #     - postgres
+  crawler:
+    container_name: py_crawler
+    restart: always
+    build: ./crawler
+    ports: 
+      - "5222:5222"
+    volumes: 
+      - ./crawler:/app
+    depends_on: 
+      - postgres
+    entrypoint: ["python", "crawler.py", "classes2019.csv"]
+  api:
+    container_name: api
+    restart: always
+    build: ./api
+    environment:
+      - PGUSER=${POSTGRES_USER}
+      - PGHOST=${POSTGRES_HOST}
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+      - PGDATABASE=${POSTGRES_DB}
+      - PGPORT=${POSTGRES_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXP_TIME=${JWT_EXP_TIME}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    entrypoint: ["npm", "start"]
 
 volumes:
   app-db:

@@ -1,4 +1,12 @@
 const { Pool } = require('pg');
+// const connectionString = 'postgres://testusr:password@postgres:5432/mytestdb'
+// const pool = new Pool({
+//   user: 'testusr',
+//   host: 'postgres',
+//   database: 'mytestdb',
+//   password: 'password',
+//   port: 5432,
+// })
 const pool = new Pool();
 
 pool.connect((err, client, release) => {

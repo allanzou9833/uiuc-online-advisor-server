@@ -26,8 +26,8 @@ DESCRIPTION
 4. Loops through with KNN similarity metric to find 
 similar courses
 """
-os.chdir(r'C:\Users\Work\Documents\CS411\Final Project\back\postgres')
-data = pd.read_csv('classes.csv')
+# os.chdir(r'C:\Users\Work\Documents\CS411\Final Project\back\postgres')
+data = pd.read_csv('classes.csv', encoding='utf-8')
 data['text'] = data['courseName'] + " " + data['description']
 data_fa19 = data.loc[(data['year'] == 2019)&(data['semester'] == 'FA')]
 data_sp19 = data.loc[(data['year'] == 2019)&(data['semester'] == 'SP')]

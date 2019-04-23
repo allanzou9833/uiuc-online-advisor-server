@@ -28,10 +28,15 @@ def crawl(file):
     classes = [tuple(x) for x in classes]
     removed = set()
     #print(len(classes))
-    conn = psycopg2.connect(host="localhost", dbname="mytestdb", user="testusr", password="password")
+    conn = psycopg2.connect(host="postgres", dbname="mytestdb", user="testusr", password="password")
     cur = conn.cursor()
     year = 2019
     semester = 'FA'
+
+    # comment this out after node image done
+    cur.execute("UPDATE classes SET status=%s WHERE year=%s AND semester=%s;", ('bleh', year, semester))
+    conn.commit()
+    ##############
     while True:
         start = time.time()
         for idx, val in enumerate(classes):

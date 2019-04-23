@@ -63,7 +63,6 @@ module.exports = (router) => {
 
     pyProg.stdout.on('data', (ret) => {
       result += ret.toString();
-      // console.log(result)
     })
 
     pyProg.stdout.on('end', async () => {
