@@ -5,28 +5,11 @@ CREATE TABLE users (
   pw_hash VARCHAR(100) NOT NULL
 );
 
--- CREATE TABLE departments (
---   id SERIAL PRIMARY KEY,
---   name VARCHAR(100) NOT NULL,
---   abbr VARCHAR(5) NOT NULL
--- );
-
 CREATE TABLE schedules (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
-
--- CREATE TABLE classes (
---   crn INTEGER NOT NULL,
---   dept_id INTEGER REFERENCES departments(id) ON DELETE RESTRICT,
---   description VARCHAR(100)  NOT NULL,
---   course_num INTEGER  NOT NULL,
---   title VARCHAR(100)  NOT NULL,
---   semester VARCHAR(2)  NOT NULL,
---   year INTEGER  NOT NULL,
---   csv_index INTEGER PRIMARY KEY
--- );
 
 CREATE TABLE classes (
   id SERIAL PRIMARY KEY,
@@ -39,7 +22,6 @@ CREATE TABLE classes (
   crn INTEGER NOT NULL,
   status VARCHAR(50) NOT NULL
 );
-
 
 CREATE TABLE schedule_classes (
   schedule_id INTEGER REFERENCES schedules(id) ON DELETE CASCADE,
